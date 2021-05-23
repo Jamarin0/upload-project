@@ -1,6 +1,10 @@
 const routes = require('express').Router();
+const multer = require('multer');
 
-routes.get("/", (req, res) => {
+
+routes.post("/posts", multer().single('file'), (req, res) => {
+    console.log(req.file);
+    
     return res.json({ hello: "Hello World"});
 });
 
