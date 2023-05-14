@@ -13,26 +13,6 @@ routes.get("/posts", async (req, res) => {
   return res.json(posts);
 });
 
-
-// async function addWatermarkToImage(uploadedImagePath) {
-//   const uploadedImage = await loadImage(uploadedImagePath);
-//   const watermarkImage = await loadImage('pri.png');
-
-//   const canvas = createCanvas(uploadedImage.width, uploadedImage.height, 'jpeg');
-//   const context = canvas.getContext('2d');
-
-//   context.drawImage(uploadedImage, 0, 0);
-
-//   const watermarkX = 10;
-//   const watermarkY = canvas.height - watermarkImage.height - 10;
-
-//   context.drawImage(watermarkImage, watermarkX, watermarkY);
-//   console.log(processedImage, 'teste')
-
-//   const processedImage = canvas.toBuffer();
-//   return processedImage;
-// }
-
 routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
   const { originalname: name, size, key, location: url = "" } = req.file;
   try {
