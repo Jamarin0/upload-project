@@ -36,10 +36,28 @@ routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
     ctx.drawImage(watermark, watermarkX, watermarkY, watermark.width, watermark.height);
     const processedImage = canvas.toBuffer();
     
-    res.setHeader('Content-Type', `image/${imageExtension.slice(1)}`);
+    const fileName = `new_${Date.now()}${imageExtension}`;
 
+    // const uploadParams = {
+    //   Bucket: process.env.BUCKET_NAME,
+    //   Key: fileName,
+    //   Body: processedImage,
+    //   ACL: 'public-read', 
+    //   ContentType: `image/${imageExtension.slice(1)}`,
+    // };
 
-    res.send(processedImage);
+    // const uploadResult = await s3.upload(uploadParams).promise();
+
+    fs.unlinkSync(imagePath);
+
+    const post = await Post.create({
+        name,
+        size,
+        key,
+        url
+    });
+
+    res.send(post);
 
   } catch (error) {
     console.error('Error:', error);
