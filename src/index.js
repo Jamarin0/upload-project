@@ -8,16 +8,16 @@ const cors = require("cors");
 
 const app = express();
 
-/**
- * Database setup
- */
-mongoose.connect(
-  process.env.MONGO_URL,
-  {
-    useNewUrlParser: true,
-    seUnifiedTopology: true
-  }
-);
+// /**
+//  * Database setup
+//  */
+// mongoose.connect(
+//   process.env.MONGO_URL,
+//   {
+//     useNewUrlParser: true,
+//     seUnifiedTopology: true
+//   }
+// );
 
 app.use(cors());
 app.use(express.json());
